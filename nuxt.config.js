@@ -12,7 +12,10 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: '/style.css' },
+      { rel: 'stylesheet', href: 'https://unpkg.com/purecss/build/pure-min.css' },
+      { rel: 'stylesheet', href: 'https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css' }
     ]
   },
   /*
@@ -56,7 +59,10 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
+  },
+  generate: {
+    fallback: true
   }
 }

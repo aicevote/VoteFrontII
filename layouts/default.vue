@@ -1,55 +1,42 @@
 <template>
   <div>
-    <nuxt />
+    <div class="pure-menu pure-menu-horizontal">
+      <nuxt-link to="/" class="pure-menu-heading pure-menu-link">AICEVOTE</nuxt-link>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <nuxt-link to="/about" class="pure-menu-link">About</nuxt-link>
+        </li>
+        <li class="pure-menu-item">
+          <nuxt-link to="/qa" class="pure-menu-link">Q&A</nuxt-link>
+        </li>
+        <li class="pure-menu-item">
+          <nuxt-link to="/aboutus" class="pure-menu-link">About us</nuxt-link>
+        </li>
+        <li class="pure-menu-item">
+          <nuxt-link to="/feedback" class="pure-menu-link">Feedback</nuxt-link>
+        </li>
+        <li class="pure-menu-item">
+          <nuxt-link to="/signin" class="pure-menu-link">Sign in</nuxt-link>
+        </li>
+      </ul>
+    </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-5 pure-u-lg-5-24"></div>
+      <div class="pure-u-1 pure-u-md-3-5 pure-u-lg-14-24">
+        <nuxt />
+        <p>
+          (C) 2020 AICEVOTE Dev Team
+          <a href="https://github.com/aicevote">GitHub</a>
+          <a href="https://twitter.com/aicevote">Twitter</a>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
 <style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+a {
+  color: #00b7ff;
 }
 </style>
