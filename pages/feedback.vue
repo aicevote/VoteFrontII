@@ -5,10 +5,39 @@
 
     <form class="pure-form">
       <fieldset class="pure-group">
-        <input type="text" class="pure-input-1-2" placeholder="Title" />
-        <textarea class="pure-input-1-2" placeholder="Feedback"></textarea>
+        <textarea class="pure-input-1-2" placeholder="Feedback" v-model="feedback" required />
       </fieldset>
-      <button type="submit" class="pure-button pure-input-1-2 pure-button-primary">Submit</button>
+      <button
+        class="pure-button pure-input-1-2 pure-button-primary"
+        v-on:click.prevent="sendFeedback()"
+      >Submit</button>
     </form>
+    <p v-if="sendFeedbackResult==200">Success! Thank you for your feedback!</p>
+    <p v-if="sendFeedbackResult==400">Sorry, failed to send a feedback...</p>
   </div>
 </template>
+
+<script lang="ts">
+import * as aicevote from "aicevote";
+export default {
+  data: () => ({
+    feedback: "",
+    sendFeedbackResult: 0
+  }),
+  methods: {
+    sendFeedback: async function() {
+      if ((this as any).feedback == "") {
+        (this as any).sendFeedbackResult = 400;
+        return;
+      }
+      try {
+        await aicevote.postFeedback((this as any).feedback);
+      } catch (e) {
+        (this as any).sendFeedbackResult = 400;
+        return;
+      }
+      (this as any).sendFeedbackResult = 200;
+    }
+  }
+};
+</script>

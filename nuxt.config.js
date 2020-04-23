@@ -12,10 +12,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: '/style.css' },
-      { rel: 'stylesheet', href: 'https://unpkg.com/purecss/build/pure-min.css' },
-      { rel: 'stylesheet', href: 'https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
   /*
@@ -26,6 +23,8 @@ export default {
   ** Global CSS
   */
   css: [
+    'purecss/build/pure-min.css',
+    'purecss/build/grids-responsive-min.css'
   ],
   /*
   ** Plugins to load before mounting the App
