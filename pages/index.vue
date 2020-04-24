@@ -43,7 +43,7 @@ export default {
   async asyncData(context: any) {
     const sessionID = context.route.query?.sessionid;
     if (sessionID != undefined) {
-      await context.store.commit("session/signin", sessionID);
+      context.store.dispatch("session/signin", sessionID);
     }
 
     const articles = (await aicevote.getAllArticles()).related

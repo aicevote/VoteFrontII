@@ -9,10 +9,7 @@
     </div>
     <div v-else>
       <p>
-        <a
-          href="https://api.aicevote.com/auth/twitter?callback=https://beta.aicevote.com/"
-          class="pure-button pure-button-primary"
-        >Sign in with Twitter</a>
+        <a class="pure-button pure-button-primary" v-bind:href="authURI">Sign in with Twitter</a>
       </p>
       <p>
         <nuxt-link to="/" class="pure-button pure-button-primary">Continue without sign in</nuxt-link>
@@ -26,6 +23,9 @@ export default {
   computed: {
     isSignedIn() {
       return (this as any).$store.state.session.sessionToken != null;
+    },
+    authURI() {
+      return `https://api.aicevote.com/auth/twitter?callback=${location.origin}/`;
     }
   }
 };

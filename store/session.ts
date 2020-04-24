@@ -1,4 +1,5 @@
 import * as aicevote from "aicevote";
+
 export const state = () => ({
   isVisitedHome: false,
   sessionID: null,
@@ -8,28 +9,36 @@ export const state = () => ({
 });
 
 export const mutations = {
-  async signin(state: any, sessionID: string) {
-    state.sessionID = sessionID;
-    try {
-      state.sessionToken = await aicevote.getSessionToken(state.sessionID);
-      const profile = await aicevote.getMyProfile(state.sessionToken);
-      state.name = profile.name;
-      state.imageURI = profile.imageURI;
-    } catch (e) {
-      state.sessionID = null;
-      state.sessionToken = null
-      state.name = "";
-      state.imageURI = "";
-    }
+  signin(state: any, data: { sessionID: string, sessionToken: string, name: string, imageURI: string }) {
+    state.sessionID = data.sessionID;
+    state.sessionToken = data.sessionToken;
+    state.name = data.name;
+    state.imageURI = data.imageURI;
   },
-  async auth(state: any) {
-    if (state.sessionID == null) { return; }
-    state.sessionToken = await aicevote.getSessionToken(state.sessionID);
-    const profile = await aicevote.getMyProfile(state.sessionToken);
-    state.name = profile.name;
-    state.imageURI = profile.imageURI;
+  signout(state: any) {
+    state.sessionID = null;
+    state.sessionToken = null;
+    state.name = "";
+    state.imageURI = "";
   },
   visitHome(state: any) {
     state.isVisitedHome = true;
+  }
+};
+
+export const actions = {
+  async signin(context: any, sessionID: string) {
+    try {
+      const sessionToken = await aicevote.getSessionToken(sessionID);
+      const profile = await aicevote.getMyProfile(sessionToken);
+      context.commit("signin", {
+        sessionID,
+        sessionToken,
+        name: profile.name,
+        imageURI: profile.imageURI
+      });
+    } catch (e) {
+      context.commit("signout");
+    }
   }
 };
