@@ -23,8 +23,12 @@
     <div v-if="isSignedIn==true">
       <form class="pure-form">
         <input placeholder="New Comment" v-model="message" required />
-        <button class="pure-button pure-button-primary" v-on:click.prevent="comment()">Submit</button>
+        <button class="pure-button pure-button-primary" v-on:click.prevent="comment()">
+          <i class="fas fa-comment fa-fw" />
+          Comment
+        </button>
       </form>
+      <p v-if="commentResult==0"></p>
       <p v-if="commentResult==200">Success! You commented!</p>
       <p v-if="commentResult==400">Sorry, failed to comment...</p>
       <p v-if="commentResult==401">Please sign in to comment</p>

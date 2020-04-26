@@ -2,7 +2,10 @@
   <div>
     <div v-if="isVisitedHome!=true">
       <h1>Hello, new user!</h1>
-      <nuxt-link to="/about" class="pure-button pure-button-primary">Let's see what AICEVOTE is!</nuxt-link>
+      <nuxt-link to="/about" class="pure-button pure-button-primary">
+        <i class="fas fa-check fa-fw" />
+        Let's see what AICEVOTE is!
+      </nuxt-link>
     </div>
     <h2>Voting themes</h2>
     <div v-for="theme in themes" :key="theme.title">
@@ -43,7 +46,8 @@ export default {
   async asyncData(context: any) {
     const sessionID = context.route.query?.sessionid;
     if (sessionID != undefined) {
-      context.store.dispatch("session/signin", sessionID);
+      context.store.commit("session/signin", sessionID);
+      context.store.dispatch("session/auth");
     }
 
     const articles = (await aicevote.getAllArticles()).related

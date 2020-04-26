@@ -19,10 +19,9 @@
           />
           {{choice}}
         </label>
-        <button
-          class="pure-button pure-input-1-2 pure-button-primary"
-          v-on:click.prevent="vote()"
-        >Vote</button>
+        <button class="pure-button pure-input-1-2 pure-button-primary" v-on:click.prevent="vote()">
+          <i class="fas fa-vote-yea fa-fw" />Vote
+        </button>
       </form>
       <p v-if="voteResult==400">Sorry, failed to vote...</p>
       <p v-if="voteResult==401">Please sign in to vote</p>
@@ -30,7 +29,10 @@
     <div v-else>
       <h2>You aren't signed in!</h2>
       <p>
-        <nuxt-link to="/signin" class="pure-button pure-button-primary">Sign in to vote</nuxt-link>
+        <nuxt-link to="/signin" class="pure-button pure-button-primary">
+          <i class="fas fa-sign-in-alt fa-fw" />
+          Sign in to vote
+        </nuxt-link>
       </p>
     </div>
   </div>

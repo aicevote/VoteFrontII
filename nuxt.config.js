@@ -24,7 +24,8 @@ export default {
   */
   css: [
     'purecss/build/pure-min.css',
-    'purecss/build/grids-responsive-min.css'
+    'purecss/build/grids-responsive-min.css',
+    '@fortawesome/fontawesome-free/css/all.min.css'
   ],
   /*
   ** Plugins to load before mounting the App

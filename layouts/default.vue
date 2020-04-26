@@ -15,8 +15,17 @@
         <li class="pure-menu-item">
           <nuxt-link to="/feedback" class="pure-menu-link">Feedback</nuxt-link>
         </li>
-        <li class="pure-menu-item" v-if="isSignedIn==false">
-          <nuxt-link to="/signin" class="pure-menu-link">Sign in</nuxt-link>
+        <li class="pure-menu-item" v-if="isSignedIn==true">
+          <nuxt-link to="/signout" class="pure-menu-link">
+            <i class="fas fa-sign-out-alt fa-fw" />
+            Sign out
+          </nuxt-link>
+        </li>
+        <li class="pure-menu-item" v-else>
+          <nuxt-link to="/signin" class="pure-menu-link">
+            <i class="fas fa-sign-in-alt fa-fw" />
+            Sign in
+          </nuxt-link>
         </li>
       </ul>
     </div>
@@ -31,8 +40,12 @@
         <nuxt />
         <p>
           (C) 2020 AICEVOTE Dev Team
-          <a href="https://github.com/aicevote">GitHub</a>
-          <a href="https://twitter.com/aicevote">Twitter</a>
+          <a href="https://github.com/aicevote">
+            <i class="fab fa-github fa-fw" />GitHub
+          </a>
+          <a href="https://twitter.com/aicevote">
+            <i class="fab fa-twitter fa-fw" />Twitter
+          </a>
         </p>
       </div>
     </div>
@@ -51,6 +64,9 @@ export default {
     imageURI() {
       return (this as any).$store.state.session.imageURI;
     }
+  },
+  async asyncData(context: any) {
+    context.store.dispatch("session/auth");
   }
 };
 </script>

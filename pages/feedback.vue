@@ -10,7 +10,10 @@
       <button
         class="pure-button pure-input-1-2 pure-button-primary"
         v-on:click.prevent="sendFeedback()"
-      >Submit</button>
+      >
+        <i class="fas fa-paper-plane fa-fw"/>
+        Submit
+      </button>
     </form>
     <p v-if="sendFeedbackResult==200">Success! Thank you for your feedback!</p>
     <p v-if="sendFeedbackResult==400">Sorry, failed to send a feedback...</p>

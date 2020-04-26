@@ -9,11 +9,13 @@ export const state = () => ({
 });
 
 export const mutations = {
-  signin(state: any, data: { sessionID: string, sessionToken: string, name: string, imageURI: string }) {
-    state.sessionID = data.sessionID;
+  auth(state: any, data: { sessionToken: string, name: string, imageURI: string }) {
     state.sessionToken = data.sessionToken;
     state.name = data.name;
     state.imageURI = data.imageURI;
+  },
+  signin(state: any, sessionID: string) {
+    state.sessionID = sessionID;
   },
   signout(state: any) {
     state.sessionID = null;
@@ -27,12 +29,11 @@ export const mutations = {
 };
 
 export const actions = {
-  async signin(context: any, sessionID: string) {
+  async auth(context: any) {
     try {
-      const sessionToken = await aicevote.getSessionToken(sessionID);
+      const sessionToken = await aicevote.getSessionToken(context.state.sessionID);
       const profile = await aicevote.getMyProfile(sessionToken);
-      context.commit("signin", {
-        sessionID,
+      context.commit("auth", {
         sessionToken,
         name: profile.name,
         imageURI: profile.imageURI
