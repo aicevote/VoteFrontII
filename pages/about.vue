@@ -30,8 +30,6 @@
     <p>過去の投票結果の履歴を、時系列にグラフ化しており、自由に知り分析することができます。</p>
     <h3>VOTE</h3>
     <p>いつでも投票、再投票が可能で、あなたがフォローする人や、インフルエンサーの投票結果を知ることができます。</p>
-    <p>
-      <nuxt-link to="/signin" class="pure-button pure-button-primary">さあ今すぐ始めよう</nuxt-link>
-    </p>
+    <nuxt-link to="/signin" class="pure-button pure-button-primary">さあ今すぐ始めよう</nuxt-link>
   </div>
 </template>

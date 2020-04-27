@@ -22,10 +22,9 @@
     <h2>Comments</h2>
     <div v-if="isSignedIn==true">
       <form class="pure-form">
-        <input placeholder="New Comment" v-model="message" required />
+        <input placeholder="New comment" v-model="message" required />
         <button class="pure-button pure-button-primary" v-on:click.prevent="comment()">
-          <i class="fas fa-comment fa-fw" />
-          Comment
+          <fa-icon class="fa-fw" :icon="['fas', 'comment']" />&nbsp;Comment
         </button>
       </form>
       <p v-if="commentResult==0"></p>
@@ -38,8 +37,8 @@
         <tr>
           <th>#</th>
           <th>Name</th>
-          <th>Message</th>
-          <th>Time</th>
+          <th>Comment</th>
+          <th>Date</th>
         </tr>
       </thead>
 
@@ -189,33 +188,40 @@ export default {
     });
   },
   async asyncData(context: any) {
-    const themeID = parseInt(context.route.hash.slice(2), 10),
-      theme = await aicevote.getTheme(themeID),
-      result = await aicevote.getResult(themeID),
-      transition = await aicevote.getTransition(themeID),
-      comments = await aicevote.getComments(themeID),
-      users = await aicevote.getProfiles(
-        comments.map(comment => ({
-          userID: comment.userID,
-          userProvider: comment.userProvider
-        }))
-      );
+    try {
+      const themeID = parseInt(context.route.hash.slice(2), 10),
+        theme = await aicevote.getTheme(themeID),
+        result = await aicevote.getResult(themeID),
+        transition = await aicevote.getTransition(themeID),
+        comments = await aicevote.getComments(themeID),
+        users = await aicevote.getProfiles(
+          comments.map(comment => ({
+            userID: comment.userID,
+            userProvider: comment.userProvider
+          }))
+        );
 
-    return {
-      theme: theme,
-      shortTransition: convertToTransition(
-        theme.choices,
-        transition.shortTransition
-      ),
-      longTransition: convertToTransition(
-        theme.choices,
-        transition.longTransition
-      ),
-      comments: comments.reverse(),
-      users: users,
-      result: convertToResult(theme.title, theme.choices, result.results),
-      websocket: io("https://api.aicevote.com")
-    };
+      return {
+        theme: theme,
+        shortTransition: convertToTransition(
+          theme.choices,
+          transition.shortTransition
+        ),
+        longTransition: convertToTransition(
+          theme.choices,
+          transition.longTransition
+        ),
+        comments: comments.reverse(),
+        users: users,
+        result: convertToResult(theme.title, theme.choices, result.results),
+        websocket: io("https://api.aicevote.com")
+      };
+    } catch (e) {
+      context.error({
+        statusCode: 404,
+        message: "This page could not be found"
+      });
+    }
   }
 };
 </script>

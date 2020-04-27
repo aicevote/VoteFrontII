@@ -6,8 +6,7 @@
     <div class="pure-u-1 pure-u-md-1-2">
       <h2>和田 航太朗</h2>
       <p>
-        <i class="fab fa-html5 fa-fw" />
-        Front-end, Machine Learning
+        <fa-icon class="fa-fw" :icon="['fab', 'html5']" />&nbsp;Front-end, Machine Learning
       </p>
       <p>
         2018年の10月ごろ、岡本から「何かやりたいからアイデアをくれ、」と言われました。
@@ -22,8 +21,7 @@
     <div class="pure-u-1 pure-u-md-1-2">
       <h2>岡本 爽平</h2>
       <p>
-        <i class="fas fa-chart-area fa-fw" />
-        PR, Machine Learning
+        <fa-icon class="fa-fw" :icon="['fas', 'chart-area']" />&nbsp;PR, Machine Learning
       </p>
       <p>「ワクワクして落ち着かない 自由な人間の喜びだ」 — Red</p>
     </div>
@@ -31,8 +29,7 @@
     <div class="pure-u-1 pure-u-md-1-2">
       <h2>小林 龍和</h2>
       <p>
-        <i class="fas fa-palette fa-fw" />
-        Design
+        <fa-icon class="fa-fw" :icon="['fas', 'palette']" />&nbsp;Design
       </p>
       <p>アニメーションとかロゴとかを作りました。</p>
     </div>
@@ -40,8 +37,7 @@
     <div class="pure-u-1 pure-u-md-1-2">
       <h2>YUJI</h2>
       <p>
-        <i class="fas fa-server fa-fw" />
-        Back-end, Front-end
+        <fa-icon class="fa-fw" :icon="['fas', 'server']" />&nbsp;Back-end, Front-end
       </p>
       <p>SFRUUC8xLjEgNDUxIFVuYXZhaWxhYmxlIEZvciBMZWdhbCBSZWFzb25z</p>
     </div>

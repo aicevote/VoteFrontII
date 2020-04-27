@@ -15,36 +15,34 @@
         <li class="pure-menu-item">
           <nuxt-link to="/feedback" class="pure-menu-link">Feedback</nuxt-link>
         </li>
-        <li class="pure-menu-item" v-if="isSignedIn==true">
+        <li class="pure-menu-item" v-if="isSignedIn == true">
           <nuxt-link to="/signout" class="pure-menu-link">
-            <i class="fas fa-sign-out-alt fa-fw" />
-            Sign out
+            <fa-icon class="fa-fw" :icon="['fas', 'sign-out-alt']" />&nbsp;Sign out
           </nuxt-link>
         </li>
         <li class="pure-menu-item" v-else>
           <nuxt-link to="/signin" class="pure-menu-link">
-            <i class="fas fa-sign-in-alt fa-fw" />
-            Sign in
+            <fa-icon class="fa-fw" :icon="['fas', 'sign-in-alt']" />&nbsp;Sign in
           </nuxt-link>
         </li>
       </ul>
     </div>
 
     <div class="pure-g">
-      <div class="pure-u-1 pure-u-md-1-5 pure-u-lg-5-24" />
-      <div class="pure-u-1 pure-u-md-3-5 pure-u-lg-14-24">
-        <div v-if="isSignedIn==true">
-          <img class="pure-img pure-u-3-24" v-bind:src="imageURI" />
-          <p class="pure-u-20-24">Signed in as {{name}}</p>
+      <div class="pure-u-1-24 pure-u-md-1-5 pure-u-lg-5-24" />
+      <div class="pure-u-22-24 pure-u-md-3-5 pure-u-lg-14-24">
+        <div v-if="isSignedIn == true">
+          <img class="pure-img pure-u-3-24 pure-u-md-2-24 pure-u-xl-1-24" v-bind:src="imageURI" />
+          <p class="pure-u-20-24">Signed in as {{ name }}</p>
         </div>
         <nuxt />
         <p>
           (C) 2020 AICEVOTE Dev Team
           <a href="https://github.com/aicevote">
-            <i class="fab fa-github fa-fw" />GitHub
+            <fa-icon class="fa-fw" :icon="['fab', 'github']" />GitHub
           </a>
           <a href="https://twitter.com/aicevote">
-            <i class="fab fa-twitter fa-fw" />Twitter
+            <fa-icon class="fa-fw" :icon="['fab', 'twitter']" />Twitter
           </a>
         </p>
       </div>

@@ -2,10 +2,10 @@
   <div>
     <h1>{{theme.title}}</h1>
     <p>{{theme.description}}</p>
-    <div v-if="isSignedIn==true">
+    <div class="pure-u-1 pure-u-md-1-2" v-if="isSignedIn==true">
       <form class="pure-form">
         <label
-          class="pure-radio"
+          class="pure-radio pure-input-1"
           v-for="(choice, index) in theme.choices"
           v-bind:key="choice"
           v-bind:for="choice"
@@ -19,21 +19,19 @@
           />
           {{choice}}
         </label>
-        <button class="pure-button pure-input-1-2 pure-button-primary" v-on:click.prevent="vote()">
-          <i class="fas fa-vote-yea fa-fw" />Vote
+
+        <button class="pure-button pure-input-1 pure-button-primary" v-on:click.prevent="vote()">
+          <fa-icon class="fa-fw" :icon="['fas', 'vote-yea']" />&nbsp;Vote
         </button>
       </form>
       <p v-if="voteResult==400">Sorry, failed to vote...</p>
       <p v-if="voteResult==401">Please sign in to vote</p>
     </div>
     <div v-else>
-      <h2>You aren't signed in!</h2>
-      <p>
-        <nuxt-link to="/signin" class="pure-button pure-button-primary">
-          <i class="fas fa-sign-in-alt fa-fw" />
-          Sign in to vote
-        </nuxt-link>
-      </p>
+      <h2>You aren't signed in</h2>
+      <nuxt-link to="/signin" class="pure-button pure-button-primary">
+        <fa-icon class="fa-fw" :icon="['fas', 'sign-in-alt']" />&nbsp;Sign in
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -71,11 +69,18 @@ export default {
     }
   },
   async asyncData(context: any) {
-    const themeID = parseInt(context.route.hash.slice(2), 10);
-    return {
-      theme: await aicevote.getTheme(themeID),
-      redirect: context.redirect
-    };
+    try {
+      const themeID = parseInt(context.route.hash.slice(2), 10);
+      return {
+        theme: await aicevote.getTheme(themeID),
+        redirect: context.redirect
+      };
+    } catch (e) {
+      context.error({
+        statusCode: 404,
+        message: "This page could not be found"
+      });
+    }
   }
 };
 </script>
