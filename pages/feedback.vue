@@ -5,8 +5,16 @@
 
     <div class="pure-u-1 pure-u-md-1-2">
       <form class="pure-form">
-        <fieldset class="pure-group">
-          <textarea class="pure-input-1" placeholder="Please write your feedback here" v-model="feedback" required />
+        <fieldset>
+          <label>
+            Please write your feedback below.
+            <textarea
+              class="pure-input-1"
+              placeholder="Your feedback will improve our service."
+              v-model="feedback"
+              required
+            />
+          </label>
         </fieldset>
         <button
           class="pure-button pure-input-1 pure-button-primary"

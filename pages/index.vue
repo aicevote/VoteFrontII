@@ -9,8 +9,7 @@
     </div>
     <div v-for="theme in themes" :key="theme.title">
       <nuxt-link v-bind:to="'/'+(isSignedIn?'vote':'result')+'#!'+ theme.themeID">
-        <img alt="Theme icon" class="pure-img pure-u-1-24" v-bind:src="theme.imageURI" />
-        <h2 class="pure-u-20-24">{{theme.title}}</h2>
+        <h2>{{theme.title}}</h2>
       </nuxt-link>
       <p>{{theme.description}}</p>
     </div>

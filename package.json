@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A whole new form of voting",
   "author": "YUJI",
+  "license": "MIT",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
