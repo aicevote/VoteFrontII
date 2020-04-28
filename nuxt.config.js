@@ -1,7 +1,3 @@
-const title = 'AICEVOTE'
-const description = 'A whole new form of voting'
-const uri = 'https://beta.aicevote.com'
-const ogImage = `${uri}/images/ogp.png`
 
 export default {
   mode: 'spa',
@@ -9,39 +5,11 @@ export default {
   ** Headers of the page
   */
   head: {
-    title,
+    title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: description },
-      { hid: 'ogTitle', property: 'og:title', content: title },
-      { hid: 'ogType', property: 'og:type', content: 'website' },
-      { hid: 'ogUrl', property: 'og:url', content: uri },
-      {
-        hid: 'ogImage',
-        property: 'og:image',
-        content: ogImage
-      },
-      { property: 'og:site_name', content: title },
-      {
-        hid: 'ogDescription',
-        property: 'og:description',
-        content: description
-      },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { hid: 'twitterSite', name: 'twitter:site', content: title },
-      { hid: 'twitterUrl', name: 'twitter:url', content: uri },
-      { hid: 'twitterTitle', name: 'twitter:title', content: title },
-      {
-        hid: 'twitterDescription',
-        name: 'twitter:description',
-        content: description
-      },
-      {
-        hid: 'twitterImage',
-        name: 'twitter:image:src',
-        content: ogImage
-      }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -86,11 +54,24 @@ export default {
   axios: {
   },
   /*
+  ** PWA module configuration
+  ** See https://pwa.nuxtjs.org
+  */
+  pwa: {
+    meta: {
+      ogHost: 'https://beta.aicevote.com',
+      ogImage: '/ogp.png',
+      twitterCard: 'summary_large_image',
+      twitterSite: 'https://beta.aicevote.com',
+      twitterCreator: process.env.npm_package_author_name || ''
+    }
+  },
+  /*
   ** Sitemap module configuration
   ** See https://github.com/nuxt-community/sitemap-module#sitemap-options
   */
   sitemap: {
-    hostname: uri
+    hostname: 'https://beta.aicevote.com'
   },
   /*
   ** Fontawesome module configuration

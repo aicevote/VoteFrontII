@@ -32,7 +32,11 @@
       <div class="pure-u-1-24 pure-u-md-1-5 pure-u-lg-5-24" />
       <div class="pure-u-22-24 pure-u-md-3-5 pure-u-lg-14-24">
         <div v-if="isSignedIn == true">
-          <img class="pure-img pure-u-3-24 pure-u-md-2-24 pure-u-xl-1-24" v-bind:src="imageURI" />
+          <img
+            alt="User icon"
+            class="pure-img pure-u-3-24 pure-u-md-2-24 pure-u-xl-1-24"
+            v-bind:src="imageURI"
+          />
           <p class="pure-u-20-24">Signed in as {{ name }}</p>
         </div>
         <nuxt />

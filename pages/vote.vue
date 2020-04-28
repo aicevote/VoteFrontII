@@ -24,6 +24,7 @@
           <fa-icon class="fa-fw" :icon="['fas', 'vote-yea']" />&nbsp;Vote
         </button>
       </form>
+      <p v-if="voteResult==200">Success! Thank you for voting</p>
       <p v-if="voteResult==400">Sorry, failed to vote...</p>
       <p v-if="voteResult==401">Please sign in to vote</p>
     </div>
@@ -60,6 +61,7 @@ export default {
         (this as any).voteResult = 400;
         return;
       }
+      (this as any).voteResult = 200;
       (this as any).redirect(`/result#!${(this as any).theme.themeID}`);
     }
   },

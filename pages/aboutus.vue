@@ -2,7 +2,7 @@
   <div>
     <h1>About us</h1>
     <p>私たちがリアルタイム投票サイト「AICEVOTE」を運営しています。</p>
-    <img src="/images/aboutus-1.jpg" class="pure-img pure-u-1 pure-u-md-1-3" />
+    <img src="/aboutus-1.jpg" alt="Kotaro Wada" class="pure-img pure-u-1 pure-u-md-1-3" />
     <div class="pure-u-1 pure-u-md-1-2">
       <h2>和田 航太朗</h2>
       <p>
@@ -17,7 +17,7 @@
         いろいろ勉強しながら開発、運営してます。
       </p>
     </div>
-    <img src="/images/aboutus-2.jpg" class="pure-img pure-u-1 pure-u-md-1-3" />
+    <img src="/aboutus-2.jpg" alt="Sohei Okamoto" class="pure-img pure-u-1 pure-u-md-1-3" />
     <div class="pure-u-1 pure-u-md-1-2">
       <h2>岡本 爽平</h2>
       <p>
@@ -25,7 +25,7 @@
       </p>
       <p>「ワクワクして落ち着かない 自由な人間の喜びだ」 — Red</p>
     </div>
-    <img src="/images/aboutus-3.jpg" class="pure-img pure-u-1 pure-u-md-1-3" />
+    <img src="/aboutus-3.jpg" alt="Ryuto Kobayashi" class="pure-img pure-u-1 pure-u-md-1-3" />
     <div class="pure-u-1 pure-u-md-1-2">
       <h2>小林 龍和</h2>
       <p>
@@ -33,7 +33,7 @@
       </p>
       <p>アニメーションとかロゴとかを作りました。</p>
     </div>
-    <img src="/images/aboutus-4.jpg" class="pure-img pure-u-1 pure-u-md-1-3" />
+    <img src="/aboutus-4.jpg" alt="YUJI" class="pure-img pure-u-1 pure-u-md-1-3" />
     <div class="pure-u-1 pure-u-md-1-2">
       <h2>YUJI</h2>
       <p>

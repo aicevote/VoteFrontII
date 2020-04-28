@@ -46,6 +46,7 @@
         <tr v-for="comment in comments" v-bind:key="comment.createdAt">
           <td>
             <img
+              alt="User icon"
               class="pure-img"
               v-bind:src="getUserInfo(comment.userProvider,comment.userID).imageURI"
             />

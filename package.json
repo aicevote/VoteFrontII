@@ -1,9 +1,8 @@
 {
-  "name": "VoteFrontII",
+  "name": "AICEVOTE",
   "version": "1.0.0",
-  "description": "My mathematical Nuxt.js project",
+  "description": "A whole new form of voting",
   "author": "YUJI",
-  "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",

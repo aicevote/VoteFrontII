@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div v-if="isVisitedHome!=true">
+    <h1 v-if="isVisitedHome==true">Hi there!</h1>
+    <div v-else>
       <h1>Welcome, new visitor!</h1>
       <nuxt-link to="/about" class="pure-button pure-button-primary">
         <fa-icon class="fa-fw" :icon="['fas', 'check']" />&nbsp;Let's see what AICEVOTE is!
       </nuxt-link>
     </div>
-    <h2>Voting themes</h2>
     <div v-for="theme in themes" :key="theme.title">
       <nuxt-link v-bind:to="'/'+(isSignedIn?'vote':'result')+'#!'+ theme.themeID">
-        <img class="pure-img pure-u-1-24" v-bind:src="theme.imageURI" />
-        <h3 class="pure-u-20-24">{{theme.title}}</h3>
+        <img alt="Theme icon" class="pure-img pure-u-1-24" v-bind:src="theme.imageURI" />
+        <h2 class="pure-u-20-24">{{theme.title}}</h2>
       </nuxt-link>
       <p>{{theme.description}}</p>
     </div>
