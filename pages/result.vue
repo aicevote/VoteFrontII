@@ -178,15 +178,28 @@ export default {
     }
   },
   mounted() {
-    (this as any).websocket.on("result", (result: any) => {
-      if ((this as any).theme.themeID == result.themeID) {
-        (this as any).result = convertToResult(
-          (this as any).theme.title,
-          (this as any).theme.choices,
-          result.results
-        );
+    (this as any).websocket.on(
+      "result",
+      (result: { themeID: number; results: number[] }) => {
+        if ((this as any).theme.themeID == result.themeID) {
+          (this as any).result = convertToResult(
+            (this as any).theme.title,
+            (this as any).theme.choices,
+            result.results
+          );
+        }
       }
-    });
+    );
+    (this as any).websocket.on(
+      "comments",
+      (comments: { from: number; comments: any[] }) => {
+        const themeID = (this as any).theme.themeID;
+        const newComments = comments.comments
+          .filter(comment => comment.themeID == themeID)
+          .sort((a, b) => (a.createdAt = b.createdAt));
+        (this as any).comments = newComments + (this as any).comments;
+      }
+    );
   },
   async asyncData(context: any) {
     try {
