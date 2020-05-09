@@ -44,12 +44,8 @@
  * @license MIT
  */
 
-//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
-
-//! license : MIT
-
 //! moment.js
 
-//! momentjs.com
+//! moment.js language configuration
 
-//! version : 2.25.1
+//! moment.js locale configuration
