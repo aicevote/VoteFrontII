@@ -45,13 +45,9 @@
       <tbody>
         <tr v-for="comment in comments" v-bind:key="comment.createdAt">
           <td>
-            <img
-              alt="User icon"
-              class="pure-img"
-              v-bind:src="getUserInfo(comment.userProvider,comment.userID).imageURI"
-            />
+            <img alt="User icon" class="pure-img" v-bind:src="comment.imageURI" />
           </td>
-          <td>{{getUserInfo(comment.userProvider,comment.userID).name}}</td>
+          <td>{{comment.name}}</td>
           <td>{{comment.message}}</td>
           <td>{{new Date(comment.createdAt).toDateString()}}</td>
         </tr>
@@ -114,16 +110,47 @@ function convertToTransition(
       borderColor: borderColors[i],
       borderWidth: 1,
       fill: true,
-      data:
-        i == choices.length - 1
-          ? new Array(transition.length).fill(100)
-          : transition.map(result =>
-              result.percentage
-                .filter((_, j) => j <= i)
-                .reduce((pre, cur) => pre + cur)
-            )
+      data: transition.map(result =>
+        Math.min(
+          result.percentage
+            .filter((_, j) => j <= i)
+            .reduce((pre, cur) => pre + cur),
+          100
+        )
+      )
     }))
   };
+}
+
+async function convertComments(themeID: number, comments: aicevote.Comment[]) {
+  comments = comments.filter(comment => comment.themeID == themeID);
+
+  if (comments.length == 0) {
+    return [];
+  }
+
+  const users = await aicevote.getProfiles(
+    comments.map(({ userID, userProvider }) => ({ userID, userProvider }))
+  );
+
+  return comments
+    .map(comment => {
+      const user = users.find(
+        ({ userID, userProvider }) =>
+          userProvider == comment.userProvider && userID == comment.userID
+      );
+
+      return {
+        themeID: comment.themeID,
+        userID: comment.userID,
+        userProvider: comment.userProvider,
+        name: user ? user.name : "Unknown",
+        imageURI: user ? user.imageURI : "",
+        message: comment.message,
+        createdAt: comment.createdAt
+      };
+    })
+    .sort((a, b) => b.createdAt - a.createdAt);
 }
 
 export default {
@@ -164,12 +191,6 @@ export default {
         return;
       }
       (this as any).commentResult = 200;
-    },
-    getUserInfo(userProvider: string, userID: string) {
-      return (this as any).users.find(
-        (user: any) =>
-          user.userProvider == userProvider && user.userID == userID
-      );
     }
   },
   computed: {
@@ -180,24 +201,22 @@ export default {
   mounted() {
     (this as any).websocket.on(
       "result",
-      (result: { themeID: number; results: number[] }) => {
+      (result: { themeID: number; percentage: number[] }) => {
         if ((this as any).theme.themeID == result.themeID) {
           (this as any).result = convertToResult(
             (this as any).theme.title,
             (this as any).theme.choices,
-            result.results
+            result.percentage
           );
         }
       }
     );
     (this as any).websocket.on(
       "comments",
-      (comments: { from: number; comments: any[] }) => {
+      async (comments: { from: number; comments: any[] }) => {
         const themeID = (this as any).theme.themeID;
-        const newComments = comments.comments
-          .filter(comment => comment.themeID == themeID)
-          .sort((a, b) => (a.createdAt = b.createdAt));
-        (this as any).comments = newComments + (this as any).comments;
+        const newComments = await convertComments(themeID, comments.comments);
+        (this as any).comments = newComments.concat((this as any).comments);
       }
     );
   },
@@ -207,13 +226,7 @@ export default {
         theme = await aicevote.getTheme(themeID),
         result = await aicevote.getResult(themeID),
         transition = await aicevote.getTransition(themeID),
-        comments = await aicevote.getComments(themeID),
-        users = await aicevote.getProfiles(
-          comments.map(comment => ({
-            userID: comment.userID,
-            userProvider: comment.userProvider
-          }))
-        );
+        comments = await aicevote.getComments(themeID);
 
       return {
         theme: theme,
@@ -225,9 +238,8 @@ export default {
           theme.choices,
           transition.longTransition
         ),
-        comments: comments.reverse(),
-        users: users,
-        result: convertToResult(theme.title, theme.choices, result.results),
+        comments: await convertComments(themeID, comments),
+        result: convertToResult(theme.title, theme.choices, result.percentage),
         websocket: io("https://api.aicevote.com")
       };
     } catch (e) {
